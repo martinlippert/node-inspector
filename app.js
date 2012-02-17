@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-var DebugServer = require('../lib/debug-server').DebugServer,
+var DebugServer = require('./lib/debug-server').DebugServer,
     fs = require('fs'),
     path = require('path'),
     options = {};
@@ -28,7 +28,7 @@ process.argv.forEach(function (arg) {
   }
 });
 
-fs.readFile(path.join(__dirname, '../config.json'), function(err, data) {
+fs.readFile(path.join(__dirname, './config.json'), function(err, data) {
   var config,
       debugServer;
   if (err) {
@@ -44,7 +44,7 @@ fs.readFile(path.join(__dirname, '../config.json'), function(err, data) {
     }
   }
   if (!config.webPort) {
-    config.webPort = 8080;
+    config.webPort = process.env.VCAP_APP_PORT || 8080;
   }
   if (!config.debugPort) {
     config.debugPort = 5858;
@@ -58,5 +58,6 @@ fs.readFile(path.join(__dirname, '../config.json'), function(err, data) {
     console.log('session closed');
     process.exit();
   });
+
   debugServer.start(config);
 });

@@ -10,7 +10,6 @@
       "url": "http://github.com/dannycoates/node-inspector.git"
     },
     "engines" : { "node": ">=0.3.0" },
-    "bin" : { "node-inspector" : "./bin/inspector.js" },
     "dependencies": {
       "socket.io": "~0.8.2",
       "paperboy": "~0.0.2"
